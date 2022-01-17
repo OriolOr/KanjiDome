@@ -7,4 +7,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Entities\OriolOr.KanjiDome.Entities.csproj" />
+    <ProjectReference Include="..\Services\OriolOr.KanjiDome.Services.csproj" />
+  </ItemGroup>
+
 </Project>
