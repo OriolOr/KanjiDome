@@ -25,6 +25,14 @@ namespace OriolOr.KanjiDome.Services
             return userWins;
         }
 
+        public void PrintTypeTable()
+        {
+            foreach (var card in this.Match.CardsDeck)
+            {
+                Console.WriteLine(card.Type + " -> \t" + card.Strength[0] +" " +card.Strength[1]);
+            }
+        }
+
         public void FlushKanji(List<KanjiCard> CardDeck) {
 
             Match.UserDeck = new List<KanjiCard>();
@@ -67,7 +75,7 @@ namespace OriolOr.KanjiDome.Services
             return numList;
         }
 
-        public List<KanjiCard> GenerateDeck() { 
+        public List<KanjiCard> LoadDeck() { 
             
            var crdList = new List<KanjiCard>();
 
@@ -86,7 +94,7 @@ namespace OriolOr.KanjiDome.Services
             crd2.Strength = new List<KanjiType>();
             crd2.Type = KanjiType.Fire;
             crd2.KanjiSymbol = "火";
-            crd2.Color = ConsoleColor.Red;
+            crd2.Color = ConsoleColor.DarkRed;
 
             crd2.Strength.Add(KanjiType.Wind);
             crd2.Strength.Add(KanjiType.Electricity);
@@ -106,7 +114,7 @@ namespace OriolOr.KanjiDome.Services
             crd4.Strength = new List<KanjiType>();
             crd4.Type = KanjiType.Ground;
             crd4.KanjiSymbol = "土";
-            crd4.Color = ConsoleColor.Green;
+            crd4.Color = ConsoleColor.Red;
 
             crd4.Strength.Add(KanjiType.Electricity);
             crd4.Strength.Add(KanjiType.Fire);
@@ -119,7 +127,6 @@ namespace OriolOr.KanjiDome.Services
 
             crd5.Strength.Add(KanjiType.Wind);
             crd5.Strength.Add(KanjiType.Water);
-
 
             crdList.Add(crd);
             crdList.Add(crd2);
@@ -142,8 +149,12 @@ namespace OriolOr.KanjiDome.Services
 
                 if (inputCard == 0 || inputCard == 1)
                 {
-                    Console.WriteLine("Carta seleccionada: \t[" + Match.UserDeck[inputCard].Type.ToString() + "]");
+                    Console.WriteLine("User Selection: \t[" + Match.UserDeck[inputCard].Type.ToString() + "]");
                     valid = true;
+                }
+                else if(inputCard == 2)
+                {
+                    this.PrintTypeTable();
                 }
             }
 
@@ -160,7 +171,7 @@ namespace OriolOr.KanjiDome.Services
         }
         public void PlayGame() {
 
-            this.Match.CardsDeck = GenerateDeck();
+            this.Match.CardsDeck = LoadDeck();
             this.FlushKanji(this.Match.CardsDeck);
  
             var userSelection = this.UserSelection();
@@ -169,16 +180,11 @@ namespace OriolOr.KanjiDome.Services
             var userWins = CheckType(userSelection, botSelection);
 
             if (userWins == true)
-            {
-                Console.WriteLine(userSelection.Type.ToString() + " gana a " + botSelection.Type.ToString() + " has ganado !");
-            }
+                Console.WriteLine(userSelection.Type.ToString() + " wins to " + botSelection.Type.ToString() + " you win !");
             else
-            {
-                Console.WriteLine(botSelection.Type.ToString() + " gana a " + userSelection.Type.ToString() + " has perdido...");
-            }
+                Console.WriteLine(botSelection.Type.ToString() + " wins to " + userSelection.Type.ToString() + " you lose...");  
 
             Console.ReadKey();
         }
-        
     }
 }
