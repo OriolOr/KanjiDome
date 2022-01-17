@@ -29,7 +29,10 @@ namespace OriolOr.KanjiDome.Services
         {
             foreach (var card in this.Match.CardsDeck)
             {
-                Console.WriteLine(card.Type + " -> \t" + card.Strength[0] +" " +card.Strength[1]);
+                Console.ForegroundColor = card.Color;
+                Console.Write(card.Type );
+                Console.ResetColor();
+                Console.WriteLine(" -> \t" + card.Strength[0] + " " + card.Strength[1]);
             }
         }
 
@@ -52,11 +55,16 @@ namespace OriolOr.KanjiDome.Services
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine(" ---------------------------------------- ");
 
-            Console.ForegroundColor = Match.UserDeck[0].Color;
-            Console.WriteLine("UserDeck 1:\t" + Match.UserDeck[0].Type);
 
+            Console.Write("UserDeck 1:\t" );
+            Console.ForegroundColor = Match.UserDeck[0].Color;
+            Console.WriteLine(Match.UserDeck[0].Type);
+
+            Console.ResetColor(); 
+
+            Console.Write("UserDeck 2:\t");
             Console.ForegroundColor = Match.UserDeck[1].Color;
-            Console.WriteLine("UserDeck 2:\t" + Match.UserDeck[1].Type);
+            Console.WriteLine(Match.UserDeck[1].Type);
 
             Console.ForegroundColor = ConsoleColor.White;
 
@@ -104,7 +112,7 @@ namespace OriolOr.KanjiDome.Services
             crd3.Strength = new List<KanjiType>();
             crd3.Type = KanjiType.Wind;
             crd3.KanjiSymbol = "風";
-            crd3.Color = ConsoleColor.White;
+            crd3.Color = ConsoleColor.Cyan;
 
             crd3.Strength.Add(KanjiType.Ground);
             crd3.Strength.Add(KanjiType.Water);
@@ -149,7 +157,11 @@ namespace OriolOr.KanjiDome.Services
 
                 if (inputCard == 0 || inputCard == 1)
                 {
-                    Console.WriteLine("User Selection: \t[" + Match.UserDeck[inputCard].Type.ToString() + "]");
+                    Console.Write("User Selection: \t[");
+                    Console.ForegroundColor = Match.UserDeck[inputCard].Color;
+                    Console.Write(Match.UserDeck[inputCard].Type.ToString());
+                    Console.ResetColor();
+                    Console.WriteLine( "]");
                     valid = true;
                 }
                 else if(inputCard == 2)
@@ -165,7 +177,12 @@ namespace OriolOr.KanjiDome.Services
         {
             var num = random.Next(0, 1);
             var selectedCard = Match.BotDeck[num];
-            Console.WriteLine("Bot has selected: \t[" + selectedCard.Type + "]");
+
+            Console.Write("Bot has selected: \t[");
+            Console.ForegroundColor = Match.BotDeck[num].Color;
+            Console.Write(Match.BotDeck[num].Type.ToString());
+            Console.ResetColor();
+            Console.WriteLine("]");
 
             return selectedCard;
         }
