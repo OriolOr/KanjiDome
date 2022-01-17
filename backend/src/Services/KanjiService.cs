@@ -1,4 +1,5 @@
 ﻿using OriolOr.KanjiDome.Entities;
+using System.Linq;
 
 namespace OriolOr.KanjiDome.Services
 {
@@ -32,7 +33,14 @@ namespace OriolOr.KanjiDome.Services
                 Console.ForegroundColor = card.Color;
                 Console.Write(card.Type );
                 Console.ResetColor();
-                Console.WriteLine(" -> \t" + card.Strength[0] + " " + card.Strength[1]);
+                Console.Write(" -> \t");
+                Console.ForegroundColor = Match.CardsDeck.FirstOrDefault(c => c.Type == card.Strength[0]).Color;
+                Console.Write(card.Strength[0]);
+                Console.ResetColor();
+                Console.Write(" ");
+                Console.ForegroundColor = Match.CardsDeck.FirstOrDefault(c => c.Type == card.Strength[1]).Color;
+                Console.WriteLine(card.Strength[1]);
+                Console.ResetColor();
             }
         }
 
@@ -52,7 +60,7 @@ namespace OriolOr.KanjiDome.Services
             var notUsedCard = cardOrderList.GetRange(4, 1)[0];
             Match.UnnusedCard = CardDeck[notUsedCard];
 
-            Console.ForegroundColor = ConsoleColor.White;
+            Console.ResetColor();
             Console.WriteLine(" ---------------------------------------- ");
 
 
