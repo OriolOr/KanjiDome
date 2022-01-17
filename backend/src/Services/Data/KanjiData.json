@@ -1,0 +1,32 @@
+﻿[
+  {
+    "Type": "Water",
+    "KanjiSymbol": "水",
+    "Strength": [ "Ground", "Fire" ],
+    "Color": "Blue"
+  },
+  {
+    "Type": "Fire",
+    "KanjiSymbol": "火",
+    "Strength": [ "Wind", "Electricity" ],
+    "Color": "DarkRed"
+  },
+  {
+    "Type": "Wind",
+    "KanjiSymbol": "風",
+    "Strength": [ "Ground", "Water" ],
+    "Color": "Cyan"
+  },
+  {
+    "Type": "Ground",
+    "KanjiSymbol": "土",
+    "Strength": [ "Fire", "Electricity" ],
+    "Color": "Red"
+  },
+  {
+    "Type": "Electricity",
+    "KanjiSymbol": "電",
+    "Strength": [ "Wind", "Water" ],
+    "Color": "Yellow"
+  }
+]

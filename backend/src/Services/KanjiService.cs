@@ -1,5 +1,5 @@
 ﻿using OriolOr.KanjiDome.Entities;
-using System.Linq;
+using Newtonsoft.Json;
 
 namespace OriolOr.KanjiDome.Services
 {
@@ -7,9 +7,12 @@ namespace OriolOr.KanjiDome.Services
     {
         private static readonly Random random = new Random();
         private readonly Match Match;
+        private ConsoleService ConsoleService;
 
         public  KanjiService(){
+            
             this.Match = new Match();
+            this.ConsoleService = new ConsoleService(this.Match);
         }
 
         public bool CheckType(KanjiCard userCard, KanjiCard botCard)
@@ -22,32 +25,14 @@ namespace OriolOr.KanjiDome.Services
                     userWins = true;
                 }
             }
-             
             return userWins;
-        }
-
-        public void PrintTypeTable()
-        {
-            foreach (var card in this.Match.CardsDeck)
-            {
-                Console.ForegroundColor = card.Color;
-                Console.Write(card.Type );
-                Console.ResetColor();
-                Console.Write(" -> \t");
-                Console.ForegroundColor = Match.CardsDeck.FirstOrDefault(c => c.Type == card.Strength[0]).Color;
-                Console.Write(card.Strength[0]);
-                Console.ResetColor();
-                Console.Write(" ");
-                Console.ForegroundColor = Match.CardsDeck.FirstOrDefault(c => c.Type == card.Strength[1]).Color;
-                Console.WriteLine(card.Strength[1]);
-                Console.ResetColor();
-            }
         }
 
         public void FlushKanji(List<KanjiCard> CardDeck) {
 
             Match.UserDeck = new List<KanjiCard>();
             Match.BotDeck = new List<KanjiCard>();
+
             var cardOrderList = this.GetRandomSequenceWithoutRepeat(0,5,5);
             var userDeckint = cardOrderList.GetRange(0, 2);
             Match.UserDeck.Add(CardDeck[userDeckint[0]]);
@@ -60,35 +45,8 @@ namespace OriolOr.KanjiDome.Services
             var notUsedCard = cardOrderList.GetRange(4, 1)[0];
             Match.UnnusedCard = CardDeck[notUsedCard];
 
-            Console.ResetColor();
-            Console.WriteLine(" ---------------------------------------- ");
+            this.ConsoleService.PrintUserDeck();
 
-
-            Console.Write("UserDeck 1:\t" );
-            Console.ForegroundColor = Match.UserDeck[0].Color;
-            Console.WriteLine(Match.UserDeck[0].Type);
-
-            Console.ResetColor(); 
-
-            Console.Write("UserDeck 2:\t");
-            Console.ForegroundColor = Match.UserDeck[1].Color;
-            Console.WriteLine(Match.UserDeck[1].Type);
-
-            Console.ForegroundColor = ConsoleColor.White;
-
-        }
-
-        public  List<int> GetRandomSequenceWithoutRepeat(int min, int max, int arrayLength)
-        {
-            var numList = new List<int>();
-
-            while (numList.Count < arrayLength)
-            {
-                var num = random.Next(min, max);
-                if (!numList.Contains(num)) numList.Add(num);
-            }
-
-            return numList;
         }
 
         public List<KanjiCard> LoadDeck() { 
@@ -105,6 +63,8 @@ namespace OriolOr.KanjiDome.Services
             crd.Strength.Add(KanjiType.Ground);
             crd.Strength.Add(KanjiType.Fire);
 
+            crdList.Add(crd);
+
 
             KanjiCard crd2 = new KanjiCard();
             crd2.Strength = new List<KanjiType>();
@@ -115,6 +75,7 @@ namespace OriolOr.KanjiDome.Services
             crd2.Strength.Add(KanjiType.Wind);
             crd2.Strength.Add(KanjiType.Electricity);
 
+            crdList.Add(crd2);
 
             KanjiCard crd3 = new KanjiCard();
             crd3.Strength = new List<KanjiType>();
@@ -125,6 +86,7 @@ namespace OriolOr.KanjiDome.Services
             crd3.Strength.Add(KanjiType.Ground);
             crd3.Strength.Add(KanjiType.Water);
 
+            crdList.Add(crd3);
 
             KanjiCard crd4 = new KanjiCard();
             crd4.Strength = new List<KanjiType>();
@@ -135,6 +97,8 @@ namespace OriolOr.KanjiDome.Services
             crd4.Strength.Add(KanjiType.Electricity);
             crd4.Strength.Add(KanjiType.Fire);
 
+            crdList.Add(crd4);
+
             KanjiCard crd5 = new KanjiCard();
             crd5.Strength = new List<KanjiType>();
             crd5.Type = KanjiType.Electricity;
@@ -144,16 +108,30 @@ namespace OriolOr.KanjiDome.Services
             crd5.Strength.Add(KanjiType.Wind);
             crd5.Strength.Add(KanjiType.Water);
 
-            crdList.Add(crd);
-            crdList.Add(crd2);
-            crdList.Add(crd3);
-            crdList.Add(crd4);
             crdList.Add(crd5);
 
             return crdList;
 
         }
 
+        public void FillKanjiInfo(KanjiType type, String kanjiSymbol, ConsoleColor color)
+        {
+            var crdList = new List<KanjiCard>();
+
+            KanjiCard card = new KanjiCard
+            {
+                Type = type,
+                KanjiSymbol = kanjiSymbol,
+                Color = color,
+                
+            };
+            card.Strength = new List<KanjiType>();
+
+            card.Strength.Add(KanjiType.Ground);
+            card.Strength.Add(KanjiType.Fire);
+
+            crdList.Add(card);
+        }
         public KanjiCard UserSelection()
         {
             var valid = false;
@@ -174,7 +152,7 @@ namespace OriolOr.KanjiDome.Services
                 }
                 else if(inputCard == 2)
                 {
-                    this.PrintTypeTable();
+                    this.ConsoleService.PrintTypeTable();
                 }
             }
 
@@ -210,6 +188,19 @@ namespace OriolOr.KanjiDome.Services
                 Console.WriteLine(botSelection.Type.ToString() + " wins to " + userSelection.Type.ToString() + " you lose...");  
 
             Console.ReadKey();
+        }
+
+        private List<int> GetRandomSequenceWithoutRepeat(int min, int max, int arrayLength)
+        {
+            var numList = new List<int>();
+
+            while (numList.Count < arrayLength)
+            {
+                var num = random.Next(min, max);
+                if (!numList.Contains(num)) numList.Add(num);
+            }
+
+            return numList;
         }
     }
 }
