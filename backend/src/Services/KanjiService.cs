@@ -53,71 +53,18 @@ namespace OriolOr.KanjiDome.Services
             
            var crdList = new List<KanjiCard>();
 
-            KanjiCard crd = new KanjiCard();
-            crd.Strength = new List<KanjiType>();
-
-            crd.Type = KanjiType.Water;
-            crd.KanjiSymbol = "水";
-            crd.Color = ConsoleColor.Blue;
-            
-            crd.Strength.Add(KanjiType.Ground);
-            crd.Strength.Add(KanjiType.Fire);
-
-            crdList.Add(crd);
-
-
-            KanjiCard crd2 = new KanjiCard();
-            crd2.Strength = new List<KanjiType>();
-            crd2.Type = KanjiType.Fire;
-            crd2.KanjiSymbol = "火";
-            crd2.Color = ConsoleColor.DarkRed;
-
-            crd2.Strength.Add(KanjiType.Wind);
-            crd2.Strength.Add(KanjiType.Electricity);
-
-            crdList.Add(crd2);
-
-            KanjiCard crd3 = new KanjiCard();
-            crd3.Strength = new List<KanjiType>();
-            crd3.Type = KanjiType.Wind;
-            crd3.KanjiSymbol = "風";
-            crd3.Color = ConsoleColor.Cyan;
-
-            crd3.Strength.Add(KanjiType.Ground);
-            crd3.Strength.Add(KanjiType.Water);
-
-            crdList.Add(crd3);
-
-            KanjiCard crd4 = new KanjiCard();
-            crd4.Strength = new List<KanjiType>();
-            crd4.Type = KanjiType.Ground;
-            crd4.KanjiSymbol = "土";
-            crd4.Color = ConsoleColor.Red;
-
-            crd4.Strength.Add(KanjiType.Electricity);
-            crd4.Strength.Add(KanjiType.Fire);
-
-            crdList.Add(crd4);
-
-            KanjiCard crd5 = new KanjiCard();
-            crd5.Strength = new List<KanjiType>();
-            crd5.Type = KanjiType.Electricity;
-            crd5.KanjiSymbol = "電";
-            crd5.Color = ConsoleColor.Yellow;
-
-            crd5.Strength.Add(KanjiType.Wind);
-            crd5.Strength.Add(KanjiType.Water);
-
-            crdList.Add(crd5);
+            this.FillKanjiInfo(crdList,KanjiType.Water, "水",ConsoleColor.Blue,KanjiType.Ground,KanjiType.Fire);
+            this.FillKanjiInfo(crdList, KanjiType.Fire, "火", ConsoleColor.DarkRed, KanjiType.Wind, KanjiType.Electricity);
+            this.FillKanjiInfo(crdList, KanjiType.Wind, "風", ConsoleColor.Cyan, KanjiType.Ground, KanjiType.Water);
+            this.FillKanjiInfo(crdList, KanjiType.Ground, "土", ConsoleColor.Red, KanjiType.Fire, KanjiType.Electricity);
+            this.FillKanjiInfo(crdList, KanjiType.Electricity, "電", ConsoleColor.Yellow, KanjiType.Wind, KanjiType.Water);
 
             return crdList;
 
         }
 
-        public void FillKanjiInfo(KanjiType type, String kanjiSymbol, ConsoleColor color)
+        public void FillKanjiInfo(List<KanjiCard> kanjiCardList ,KanjiType type, string kanjiSymbol, ConsoleColor color, KanjiType type1, KanjiType type2)
         {
-            var crdList = new List<KanjiCard>();
-
             KanjiCard card = new KanjiCard
             {
                 Type = type,
@@ -127,11 +74,12 @@ namespace OriolOr.KanjiDome.Services
             };
             card.Strength = new List<KanjiType>();
 
-            card.Strength.Add(KanjiType.Ground);
-            card.Strength.Add(KanjiType.Fire);
+            card.Strength.Add(type1);
+            card.Strength.Add(type2);
 
-            crdList.Add(card);
+            kanjiCardList.Add(card);
         }
+
         public KanjiCard UserSelection()
         {
             var valid = false;

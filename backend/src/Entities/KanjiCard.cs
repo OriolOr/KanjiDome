@@ -5,7 +5,7 @@ namespace OriolOr.KanjiDome.Entities
     {
         public KanjiType Type;
 
-        public String KanjiSymbol;
+        public string? KanjiSymbol;
 
         public List<KanjiType> Strength;
 
