@@ -51,15 +51,15 @@ namespace OriolOr.KanjiDome.Services
 
         public List<KanjiCard> LoadDeck() { 
             
-           var crdList = new List<KanjiCard>();
+           var cardList = new List<KanjiCard>();
 
-            this.FillKanjiInfo(crdList,KanjiType.Water, "水",ConsoleColor.Blue,KanjiType.Ground,KanjiType.Fire);
-            this.FillKanjiInfo(crdList, KanjiType.Fire, "火", ConsoleColor.DarkRed, KanjiType.Wind, KanjiType.Electricity);
-            this.FillKanjiInfo(crdList, KanjiType.Wind, "風", ConsoleColor.Cyan, KanjiType.Ground, KanjiType.Water);
-            this.FillKanjiInfo(crdList, KanjiType.Ground, "土", ConsoleColor.Red, KanjiType.Fire, KanjiType.Electricity);
-            this.FillKanjiInfo(crdList, KanjiType.Electricity, "電", ConsoleColor.Yellow, KanjiType.Wind, KanjiType.Water);
+            this.FillKanjiInfo(cardList,KanjiType.Water, "水",ConsoleColor.Blue,KanjiType.Ground,KanjiType.Fire);
+            this.FillKanjiInfo(cardList, KanjiType.Fire, "火", ConsoleColor.DarkRed, KanjiType.Wind, KanjiType.Electricity);
+            this.FillKanjiInfo(cardList, KanjiType.Wind, "風", ConsoleColor.Cyan, KanjiType.Ground, KanjiType.Water);
+            this.FillKanjiInfo(cardList, KanjiType.Ground, "土", ConsoleColor.Red, KanjiType.Fire, KanjiType.Electricity);
+            this.FillKanjiInfo(cardList, KanjiType.Electricity, "電", ConsoleColor.Yellow, KanjiType.Wind, KanjiType.Water);
 
-            return crdList;
+            return cardList;
 
         }
 
