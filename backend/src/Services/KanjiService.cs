@@ -125,14 +125,15 @@ namespace OriolOr.KanjiDome.Services
             if (userWins == true)
             {
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine(userSelection.Type.ToString() + " wins to " + botSelection.Type.ToString() + " you win !");
+                Console.WriteLine(userSelection.Type.ToString() + " wins to " + botSelection.Type.ToString() + ".You win !!");
             }
             else
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine(botSelection.Type.ToString() + " wins to " + userSelection.Type.ToString() + " you lose...");
+                Console.WriteLine(botSelection.Type.ToString() + " wins to " + userSelection.Type.ToString() + ". You lose...");
             }
 
+            Console.ResetColor();
             Console.ReadKey();
         }
 
