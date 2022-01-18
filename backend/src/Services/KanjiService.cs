@@ -46,7 +46,6 @@ namespace OriolOr.KanjiDome.Services
             Match.UnnusedCard = CardDeck[notUsedCard];
 
             this.ConsoleService.PrintUserDeck();
-
         }
 
         public List<KanjiCard> LoadDeck() { 
@@ -87,15 +86,11 @@ namespace OriolOr.KanjiDome.Services
 
             while (valid == false)
             {
-                inputCard = Int16.Parse(Console.ReadLine());
+                inputCard = short.Parse(Console.ReadLine());
 
                 if (inputCard == 0 || inputCard == 1)
                 {
-                    Console.Write("User Selection: \t[");
-                    Console.ForegroundColor = Match.UserDeck[inputCard].Color;
-                    Console.Write(Match.UserDeck[inputCard].Type.ToString());
-                    Console.ResetColor();
-                    Console.WriteLine( "]");
+                    this.ConsoleService.PrintUserInfo(inputCard);
                     valid = true;
                 }
                 else if(inputCard == 2)
@@ -112,11 +107,7 @@ namespace OriolOr.KanjiDome.Services
             var num = random.Next(0, 1);
             var selectedCard = Match.BotDeck[num];
 
-            Console.Write("Bot has selected: \t[");
-            Console.ForegroundColor = Match.BotDeck[num].Color;
-            Console.Write(Match.BotDeck[num].Type.ToString());
-            Console.ResetColor();
-            Console.WriteLine("]");
+            this.ConsoleService.PrintBotInfo(num);
 
             return selectedCard;
         }
@@ -137,6 +128,7 @@ namespace OriolOr.KanjiDome.Services
 
             Console.ReadKey();
         }
+
 
         private List<int> GetRandomSequenceWithoutRepeat(int min, int max, int arrayLength)
         {

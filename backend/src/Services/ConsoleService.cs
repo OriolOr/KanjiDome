@@ -46,13 +46,23 @@ namespace OriolOr.KanjiDome.Services
             }
         }
 
-        public void PrintUserSelection(){
-
-            throw new NotImplementedException();
+        public void PrintUserInfo(int inputCard)
+        {
+            Console.Write("User Selection: \t[");
+            Console.ForegroundColor = Match.UserDeck[inputCard].Color;
+            Console.Write(Match.UserDeck[inputCard].Type.ToString());
+            Console.ResetColor();
+            Console.WriteLine("]");
         }
 
-        public void PrintBotSelection(){
-            throw new NotImplementedException();
+
+        public void PrintBotInfo(int num)
+        {
+            Console.Write("Bot has selected: \t[");
+            Console.ForegroundColor = Match.BotDeck[num].Color;
+            Console.Write(Match.BotDeck[num].Type.ToString());
+            Console.ResetColor();
+            Console.WriteLine("]");
         }
     }
 }
