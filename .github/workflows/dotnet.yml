@@ -23,6 +23,11 @@ jobs:
       run: dotnet restore
       working-directory: backend/
       
-    - name: Build Taiko Solution
+    - name: Build KanjiDome Solution
       run: dotnet build --no-restore
+      working-directory: backend/
+      
+      
+    - name: Run KanjiDome Test Set
+      run: dotnet test --no-restore
       working-directory: backend/
