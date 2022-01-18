@@ -111,6 +111,7 @@ namespace OriolOr.KanjiDome.Services
 
             return selectedCard;
         }
+
         public void PlayGame() {
 
             this.Match.CardsDeck = LoadDeck();
