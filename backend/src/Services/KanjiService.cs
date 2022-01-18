@@ -7,12 +7,12 @@ namespace OriolOr.KanjiDome.Services
     {
         private static readonly Random random = new Random();
         private readonly Match Match;
-        private ConsoleService ConsoleService;
+        private LogService LogService;
 
         public  KanjiService(){
             
             this.Match = new Match();
-            this.ConsoleService = new ConsoleService(this.Match);
+            this.LogService = new LogService(this.Match);
         }
 
         public bool CheckType(KanjiCard userCard, KanjiCard botCard)
@@ -45,7 +45,7 @@ namespace OriolOr.KanjiDome.Services
             var notUsedCard = cardOrderList.GetRange(4, 1)[0];
             Match.UnnusedCard = CardDeck[notUsedCard];
 
-            this.ConsoleService.PrintUserDeck();
+            this.LogService.PrintUserDeck();
         }
 
         public List<KanjiCard> LoadDeck() { 
@@ -90,12 +90,12 @@ namespace OriolOr.KanjiDome.Services
 
                 if (inputCard == 0 || inputCard == 1)
                 {
-                    this.ConsoleService.PrintUserInfo(inputCard);
+                    this.LogService.PrintUserInfo(inputCard);
                     valid = true;
                 }
                 else if(inputCard == 2)
                 {
-                    this.ConsoleService.PrintTypeTable();
+                    this.LogService.PrintTypeTable();
                 }
             }
 
@@ -107,7 +107,7 @@ namespace OriolOr.KanjiDome.Services
             var num = random.Next(0, 1);
             var selectedCard = Match.BotDeck[num];
 
-            this.ConsoleService.PrintBotInfo(num);
+            this.LogService.PrintBotInfo(num);
 
             return selectedCard;
         }
@@ -120,11 +120,18 @@ namespace OriolOr.KanjiDome.Services
             var botSelection = this.BotSelection();
 
             var userWins = CheckType(userSelection, botSelection);
+            Console.WriteLine(" ");
 
             if (userWins == true)
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine(userSelection.Type.ToString() + " wins to " + botSelection.Type.ToString() + " you win !");
+            }
             else
-                Console.WriteLine(botSelection.Type.ToString() + " wins to " + userSelection.Type.ToString() + " you lose...");  
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine(botSelection.Type.ToString() + " wins to " + userSelection.Type.ToString() + " you lose...");
+            }
 
             Console.ReadKey();
         }
