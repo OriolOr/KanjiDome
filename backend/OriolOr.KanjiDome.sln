@@ -9,6 +9,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OriolOr.KanjiDome.Entities"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OriolOr.KanjiDome.Services", "src\Services\OriolOr.KanjiDome.Services.csproj", "{5CC993FF-069E-4F48-A59D-5D262E18A70B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7D3D1D06-9113-48BF-AF56-C3BA87209375}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{85046628-AD18-446A-92FE-6806C83BE3B1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OriolOr.KanjiDome.Test", "OriolOr.KanjiDome.Test\OriolOr.KanjiDome.Test.csproj", "{3207DC3A-E772-4E3E-AD4A-1C8017B10DDA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,9 +33,19 @@ Global
 		{5CC993FF-069E-4F48-A59D-5D262E18A70B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5CC993FF-069E-4F48-A59D-5D262E18A70B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5CC993FF-069E-4F48-A59D-5D262E18A70B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3207DC3A-E772-4E3E-AD4A-1C8017B10DDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3207DC3A-E772-4E3E-AD4A-1C8017B10DDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3207DC3A-E772-4E3E-AD4A-1C8017B10DDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3207DC3A-E772-4E3E-AD4A-1C8017B10DDA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{32938778-BC0E-434C-8BDC-EF8E006594AB} = {7D3D1D06-9113-48BF-AF56-C3BA87209375}
+		{8CE4A9C4-3DB4-4AD2-B570-340524EF5DB2} = {7D3D1D06-9113-48BF-AF56-C3BA87209375}
+		{5CC993FF-069E-4F48-A59D-5D262E18A70B} = {7D3D1D06-9113-48BF-AF56-C3BA87209375}
+		{3207DC3A-E772-4E3E-AD4A-1C8017B10DDA} = {85046628-AD18-446A-92FE-6806C83BE3B1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AE33C996-E423-4823-B92A-74AB5E4250E0}

@@ -1,6 +1,6 @@
 ﻿using OriolOr.KanjiDome.Entities;
 
-namespace OriolOr.KanjiDome.Services
+namespace OriolOr.KanjiDome.ConsoleApp.Service
 {
     public class ConsoleService
     {

@@ -8,8 +8,11 @@ public class Program
         while (true)
         {
             KanjiService kanjiService = new KanjiService();
+            
             Console.Clear();
+            
             Console.WriteLine("Kanji Dome 0.1");
+            
             kanjiService.PlayGame();
         }
 
